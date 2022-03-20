@@ -9,15 +9,24 @@
   <h1>Tarifa Beach</h1>
   <p class="center italic">By Mark</p>
   <div class="kite-container">
-    <img class="kite-image" src="./tarifa.jpg">
+    <img onclick="alertUser()" class="kite-image" src="./tarifa.jpg">
+  </div>
+  <div class="count-container">
+    <p>A Total Of <span id="count"></span> People Have Visited This Beach.</p>
   </div>
   <div class="data">
-    <ul>
-      <li>Sand is pale yellow and thin</li>
-      <li>The color of the water is turquoise and warm</li>
-      <li>You can buy seafood in the beach adjacent restaurants.</li>
-    </ul>
-    <p>Phone Number of the manager: <a href="tel:+34 948 324 312">+34 948 324 312</a></p>
+    <div>
+      <ul>
+        <li>Sand is pale yellow and thin</li>
+        <li>The color of the water is turquoise and warm</li>
+        <li>You can buy seafood in the beach adjacent restaurants.</li>
+      </ul>
+    </div>
+    <span>Phone Number of the manager: <a href="tel:+34 948 324 312">+34 948 324 312</a></span>
+  </div>
+
+  <div class="button-container">
+    <button onclick="incrementCounter('dina')">I Visited Tarifa!</button>
   </div>
 
 </body>
@@ -45,26 +54,103 @@
     width: 50%;
   }
 
+  .kite-image:hover {
+    border: solid 2px #165ccc;
+  }
+
   .data {
     display: flex;
     justify-content: center;
     gap: 10px;
+    margin-top: 20px;
+    align-items: stretch;
   }
 
-  .data > * {
+  .data>* {
     border: 2px solid #ccc;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 6px;
+    padding: 20px 10px 20px 10px;
   }
 
   a {
     color: sandybrown;
   }
+
+  .button-container {
+    display: flex;
+    margin-top: 40px;
+  }
+
+  button {
+    margin: auto;
+    background-color: #4287f5;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    padding: 4px 8px 4px 8px;
+    border-radius: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    width: 50%;
+  }
+
+  button:hover {
+    background-color: #165ccc;
+  }
+
+  #count {
+    padding: 4px 2px 4px 2px;
+  }
+
+  .count-container {
+    text-align: center;
+  }
 </style>
 
 <script>
-  
+  // variable that stores the amount of times you click on the button.
+  let myVisitsCounter = 0;
+
+  /**
+  * Function that increments the visit counter.
+  */
+  function incrementCounter(parameter) {
+    console.log(`Hello ${parameter}Land`);
+
+    myVisitsCounter++;
+
+    updateNumberOnPage();
+
+    updateColorOfCount();
+  }
+
+  function updateNumberOnPage() {
+    // get the element from the page, we get the <span> with id = count
+    let myHtmlElement = document.getElementById('count');
+    // set the text of the span to the count.
+    myHtmlElement.innerText = myVisitsCounter;
+  }
+
+  function updateColorOfCount() {
+    let myHtmlElement = document.getElementById('count');
+    // we add different colors based on how many peop
+    if (myVisitsCounter > 0 && myVisitsCounter < 5) {
+      myHtmlElement.style = "background-color: #bae7f5; color: #fff";
+    } else if (myVisitsCounter > 5 && myVisitsCounter < 10) {
+      myHtmlElement.style = "background-color: #4e7bb5; color: #fff";
+    } else if (myVisitsCounter > 10) {
+      // Another way to do it.
+      myBackground = "#5f2f9e";
+      myColor = "#fff";
+      myHtmlElement.style = `background-color: ${myBackground}; color: ${myColor}`;
+    }
+  }
+
+  function alertUser() {
+    alert("You Pressed The Beach Picture");
+  }
+
+  // call it when the page loads so we get the initial count.
+  updateNumberOnPage();
 </script>
 
 </html>
